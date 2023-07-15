@@ -35,7 +35,7 @@ define( 'WP_CMS_DATABASE', "database_name"); // mysql database name
 define( 'WP_CMS_DOCS_INCREMENT', "1");       // Starting value for imported records.
 define( 'WP_CMS_CATEGORIES_INCREMENT', "1"); // Starting value for imported categories
 define( 'WP_CMS_TAGS_INCREMENT', "1");       // Starting value for imported tags.
-define( 'WP_CMS_SILENT', "ON");              // If status messages will be outputted on screen.
+define( 'WP_CMS_SILENT', "OFF");             // If status messages will be outputted on screen. Set to ON for silent mode.
 define( 'WP_CMS_CSS', "ON");                 // Clean image css (ON or OFF)
 
 $images_css     	= "img-responsive";  // Default image classes to be added to imported data (optional)	
@@ -82,7 +82,7 @@ Example, to modify the script to check your existing usernames table and add new
 
 - PHP 7.2 or higher (PHP 8.1 Recommended)
 - MySQL compatible database (MySQL Server, MariaDB, Amazon Aurora-MySQL, etc)
-- Allow_url_fopen is "ON" in php.ini for image copying from server to server (usually it will be turned on by default)
+- 'allow_url_fopen' is "ON" in php.ini for copying images from a remote URL to the local server (usually it will be turned on by default)
 - WordPress XML export file (posts or pages).
 
 #### Is there a limit on the amount of data that can be processed?
@@ -110,6 +110,16 @@ The class processes the data that is included in the WordPress XML export file b
 - Categories for the individual page or post - name and slug
 
 The XML import script does not import the featured images since those are not included in the default WP export XML files. There are several plugins available to include that data however. If you are using one of those plugins, you can easily modify the class and db schema to acommodate the additional field. The script also does not import other content on the page such as sidebar content, header images, etc. (That content will be specific to the WordPress install as well and not relevant for use in an external system).
+
+## Other Uses | Enhancements
+If you will be integrating this class directly into an existing applicsation and not using it as a stand-alone import tool, we recommend calling it from a client-side ajax function of equivalent. The way I integrated this class into our CMS was:
+
+- Client uploads their WordPress XML posts of pages file with a standard PHP upload scripta and AJAX
+- Success function of the 1st AJAX call triggers the $cms_content->process("xml") with another AJAX call.
+- Success function for the second AJAX call outputs the results (number of converted records) to the client
+- Secondary image copy process is triggered  with a third AJAX call... $cms_content->process("images", $saved_images_path)
+- Success function of third ajax call outputs the number of converted images.
+- Client is given option of viewing imported records that have been saved in MySQL.
 
 
 
