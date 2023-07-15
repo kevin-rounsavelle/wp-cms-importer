@@ -127,9 +127,9 @@ if the global config variable 'WP_CMS_SILENT' is set to OFF (default), the messa
 Another use for this script is converting all image references in the imported WP content from locallly saved files to CDN distributed images. 
 
 Adding a simple PHP str_replace statement in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality:
-
+lINE 430 $src = str_replace('wp-content', $this->uploads_folder, $src);
 ```
-$src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);
+!$src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);!
 ```
 
 Another enhancement is adding an API call to post the files to a CDN instead of simply copying them to the local server's images folder. 
