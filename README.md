@@ -126,18 +126,25 @@ if the global config variable 'WP_CMS_SILENT' is set to OFF (default), the messa
 
 Another use for this script is converting all image references in the imported WP content from locallly saved files to CDN distributed images. 
 
-Adding a simple PHP str_replace statement right after LINE #430 in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality:
+Adding a simple PHP str_replace statement right after LINE #430 in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality
+
+Example:
 
 430  $src = str_replace('wp-content', $this->uploads_folder, $src);
 
-**+$src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);+**
+```
+$src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);
 
+```
+... 
 
 Another enhancement is adding an API call to post the files to a CDN instead of simply copying them to the local server's images folder. 
 
 Replacing copy($file_url, $destination_save); in the **db_copy_images()** function with an API call (post) to a specific provider (i.e. AWS s3) will allow you to post all the page images directly to the CDN and optimize the site pages for global content distribution in the new CMS.
 
 I have successfully integratd the AWS PHP SDK with this class to post all images to an s3 bucket (Bucket is an assigned Cloudfront distribution).
+
+If i get enough requests for a specific CDN provider such as S3/CloudFront, I may include that in a future version of this class.
 
 ## Why I created WP_CMS_IMPORTER
 
