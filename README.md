@@ -117,7 +117,7 @@ The XML import script does not import the featured images since those are not in
 
 We needed to migrate a few dozen client WordPress sites that ranged from small sites to large sites with 100s of posts and pages and 1000s of images over to our new CMS platform.  
 
-Unfortunately, after manually converting a few sites, I realized that it would take tons of time and repetive tasks to get all the other client sites migrated off of WordPress. After tons of research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
+Unfortunately, after manually converting a few sites, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off of WordPress. After tons of research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
 
 Therefore, since we also needed to clean out all the properiety css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from wp-content to the specific images folder on the new destination server, I knew that a custom automated import function was required.
 
