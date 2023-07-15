@@ -123,7 +123,7 @@ Therefore, since we also needed to clean out all the properiety css markups and 
 
 Finally, since most of the new sites were still under developement, the source WP site had to remain live and we needed an easy way to repeat the import process with the most recent content once the new site was ready for launch 
 
-I created the WP_CMS_IMPORTER class so it could be used on WordPress site conversion projects of any size and the imported data can then be easily ported into any existing CMS or custom DB schama. The original version of this script was proprietary to our CMS DB schema but this class has been modified to import the data directly into generic temporary data tables so you can then easily copy those records into your specific mysql tables (if required).
+I created the WP_CMS_IMPORTER class so it could be used on WordPress site conversion projects of any size and the imported data can then be easily ported into any existing CMS or custom DB schema. The original version of this script was proprietary to our CMS DB schema but this class has been modified to import the data directly into generic temporary data tables so you can then easily copy those records into your specific mysql tables (if required).
 
 The conversion time for importing clean and usable WP content has now decreased from hours to minutes and I hope this PHP class helps other developers who have been struggling with importing WP content into other sytems.
 ## Authors
