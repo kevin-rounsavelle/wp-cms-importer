@@ -1,29 +1,33 @@
 
 # wp_cms_importer
 
-The wp_cms_importer class will parse, clean and import WordPress posts and/or pages using the standard WP Export XML files and add the records directly into generic (non WP) mysql tables without the WordPress-specific content. The wp_cms_importer class allows the WordPress content to be directly integrated into any CMS without manually copying content and without having to use direct SQL queries to clean the data post-import.
+The wp_cms_importer PHP class will parse, clean and import WordPress posts and/or pages using the standard WP Export XML files and add the document records directly into generic (non WP) mysql tables without the WordPress-specific content. The wp_cms_importer class allows the WordPress content to be directly integrated into any CMS without manually copying content and without having to use direct SQL queries to clean the data post-import.
 
 
 ## Features
 
 - Complete parsing of WordPress XML posts or pages file(s).
-- Cleaning (removal) of existing image's CSS classes (on/off option)
-- Automatically add specific CSS class(s) to all imported image references (optional)
+- Cleaning of existing image's WP CSS classes (on/off option)
+- Automatically add default CSS class(s) to all imported image references (optional)
 - Removal of all WordPress Generated HTML comments
-- Renaming paths of all images to the new server URL and/or images directory. 
+- Rename paths of all images to the new server URL and/or images directory. 
 - Script automatically excludes CDN images from import to new server.
-- Setting development server URL in content paths.
-- Set auto-increment values to specific values for imported data to synch with existing CMS record counts.
+- Setting alternate server destination URL in content paths for development sites.
+- Set auto-increment values to specific starting values so imported data with synch with existing CMS record counts.
 
 
 ## Installation | Usage
 
-Export the WordPress site posts or pages in your wp-admin under Tools > Export. Export each type as a seperate XML file.
+Export the WordPress site posts or WordPress pages in your /wp-admin/ under Tools > Export. 
+
+Export each document type as a seperate XML files. (i.e. posts.xml, pages.xml)
 
 Copy the wp_cms_importer.php file up your webserver where you want to import the data.
 
-Include the wp_cms_imported.php file into your php file or project and set the required config parameters. 
-(Recommended modifying the included import_example.php file when first using the class to learn how to apply it to your specific import requirements. The import_example.php file contains detailed comments on all config options)
+Include the wp_cms_imported.php class file into your php file or project and set the required config parameters. 
+
+Recommended modifying the included import_example.php file when first using the class to learn how to apply it to your specific import requirements. The import_example.php file contains detailed comments on all config options.
+
 ## Config Settings
 ```
 define( 'WP_CMS_MODE', "TEST");              // Sets the import run mode: TEST or DATABASE
@@ -38,13 +42,13 @@ define( 'WP_CMS_TAGS_INCREMENT', "1");       // Starting value for imported tags
 define( 'WP_CMS_SILENT', "OFF");             // If status messages will be outputted on screen. Set to ON for silent mode.
 define( 'WP_CMS_CSS', "ON");                 // Clean image css (ON or OFF)
 
-$images_css     	= "img-responsive";  // Default image classes to be added to imported data (optional)	
-$uploads_folder 	= 'site-media';      // Destination folder of imported image files
-$saved_images_path 	= "/";               // Relative path to $uploads_folder in relation to script location. Leave as "/" for root.
+$images_css     	  = "img-responsive";      // Default image classes to be added to imported data (optional)	
+$uploads_folder 	  = 'site-media';          // Destination folder of imported image files
+$saved_images_path 	= "/";                   // Relative path to $uploads_folder in relation to script location. Leave as "/" for root.
 
-$wp_xml      		= 'posts.xml';       // WP posts or WP pages xml export file name/path.
+$wp_xml      		    = 'posts.xml';           // WP posts or WP pages xml export file name/path.
 
-$development_url    = "";                // URL of development server (optional).
+$development_url    = "";                    // URL of development server (optional).
 ```
 
 After setting the configuration variables, initilize the class and call the specific function as shown below:
@@ -87,7 +91,7 @@ Example, to modify the script to check your existing usernames table and add new
 
 #### Is there a limit on the amount of data that can be processed?
 
-No, there is no limit on the number of pages, posts or images that can be imported and transferred. The script could potentially time-out when copying 100s of MBs )or GBS) of images from the old server to the new server but since the images are marked off individually as completed after transferring, you can simply re-run the image copy feature if for some reason a time-out occured. The script has a high PHP script time-out already set however. To avoid a potential time-out on very, very large sites, run the XML process and Image Copy process seperately (not sequentially). More information on how to do this is in the import_example.php file.
+No, there is no limit on the number of pages, posts or images that can be imported and transferred. The script could potentially time-out when copying 100s of MBs (or GBS) of images from the old server to the new server but since the images are marked off individually as completed after transferring, you can simply re-run the image copy feature if for some reason a time-out occured. The script has a high PHP script time-out already set however. To avoid a potential time-out on very, very large sites, run the XML process and Image Copy process seperately (not sequentially). More information on how to do this is in the import_example.php file.
 
 #### Does it work on localhost?
 
@@ -99,9 +103,10 @@ The class processes the data that is included in the WordPress XML export file b
 
 - Title of the post or page
 - URL (slug) of the post or page
-- Active status of doc - i,e published or draft.
+- Active status of doc : i,e published or draft.
+- Doc Type : page, post or custom post type.
 - Author / creator of the post or page.
-- Doc Post | Published Date.
+- Doc Post Date | Published Date.
 - Doc last edited date.
 - Page or Post HTML content
 - Images that have been cleaned from WP-specific CSS and paths.
@@ -124,9 +129,9 @@ If you will be integrating this class directly into an existing application and 
 
 if the global config variable 'WP_CMS_SILENT' is set to OFF (default), the messages that are outputted during the conversion process can be used directly in your JS functions for client status messages.
 
-Another use for this script is converting all image references in the imported WP content from locallly saved files to CDN distributed images. 
+Another use for this script is converting all image references in the imported WP content from locally saved files to CDN distributed images. 
 
-Adding a simple PHP str_replace statement right after LINE #430 in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality
+Adding a new simple PHP str_replace statement right after LINE #430 in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality.
 
 Example:
 
@@ -144,7 +149,7 @@ Replacing copy($file_url, $destination_save); in the **db_copy_images()** functi
 
 I have successfully integratd the AWS PHP SDK with this class to post all images to an s3 bucket (Bucket is an assigned Cloudfront distribution).
 
-If i get enough requests for a specific CDN provider such as S3/CloudFront, I may include that in a future version of this class.
+If i get enough requests for a specific CDN provider such as S3/CloudFront, I may include that in a future version of this class. However, if you can sucessfully post a file to your CDN with PHP, it is very simple to replace the default copy command on line # with your custom CDN API copy command.
 
 ## Why I created WP_CMS_IMPORTER
 
