@@ -157,7 +157,7 @@ I needed to migrate a few dozen client WordPress sites that ranged from small sh
 
 Unfortunately, after manually converting a few of the "easy" ones, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off of WordPress. After extensive research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
 
-Therefore, since we also needed to clean out the properiety css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from /wp-content/ to the specific images folder on the new destination server, I knew that a custom automated import function was required.
+Therefore, since we also needed to clean out the css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from /wp-content/ to the specific images folder on the new destination server, I knew that a custom automated import function was required.
 
 Finally, since most of the new non-WP sites were still under active developement, the "old" WordPress site had to remain live and we needed an easy way to repeat the import process with the most recent content once the new site was ready for launch 
 
