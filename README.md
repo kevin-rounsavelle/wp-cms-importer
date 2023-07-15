@@ -153,11 +153,11 @@ If I receive multiple requests for a specific CDN provider such as S3/CloudFront
 
 ## Why I created WP_CMS_IMPORTER
 
-I needed to migrate a few dozen client WordPress sites that ranged from small showcase sites to large ecommeerce sites with 100s of posts and pages and 1000s of images over to our new CMS platform.  
+I needed to migrate a few dozen client WordPress sites over to our new CMS platform. The WordPress installs ranged in size and complexity from small-business showcase sites to large e-commerce sites with 100s of posts and pages and 1000s of images.  
 
-Unfortunately, after manually converting a few of the "easy" ones, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off of WordPress. After extensive research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
+Unfortunately, after manually converting a few of the "easy" ones, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off WordPress over to our CMS. After extensive research on Google, Stack Exchange, etc, it was evident that there were no commercial tools or open-source scripts that could even come close to automating the content migration process effectively. 
 
-Therefore, since we also needed to clean out the css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from /wp-content/ to the specific images folder on the new destination server, I knew that a custom automated import function was required.
+Therefore, since we also needed to clean out the css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from /wp-content/ to the specific images folder on the new destination server, I knew that coding a custom automated import tool from scratch was required.
 
 Finally, since most of the new non-WP sites were still under active developement, the "old" WordPress site had to remain live and we needed an easy way to repeat the import process with the most recent content once the new site was ready for launch 
 
