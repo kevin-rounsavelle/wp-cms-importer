@@ -145,11 +145,11 @@ $src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);
 
 Another enhancement is adding an API call to post the files to a CDN instead of simply copying them to the local server's images folder. 
 
-Replacing copy($file_url, $destination_save); in the **db_copy_images()** function with an API call (post) to a specific provider (i.e. AWS s3) will allow you to post all the page images directly to the CDN and optimize the site pages for global content distribution in the new CMS.
+Replacing copy($file_url, $destination_save); in the **db_copy_images()** function (line # 1119) with an API call (post) to a specific provider (i.e. AWS s3) will allow you to post all the page images directly to the CDN and optimize the site pages for global content distribution in the new CMS.
 
 I have successfully integratd the AWS PHP SDK with this class to post all images to an s3 bucket (Bucket is an assigned Cloudfront distribution).
 
-If i get enough requests for a specific CDN provider such as S3/CloudFront, I may include that in a future version of this class. However, if you can sucessfully post a file to your CDN with PHP, it is very simple to replace the default copy command on line # with your custom CDN API copy command.
+If I receive multiple requests for a specific CDN provider such as S3/CloudFront, I may include that in a future version of this class. However, if you can sucessfully post a file to your CDN with their PHP API or code-snippet, it is very simple to replace the default copy command on line #1119 with your custom CDN API upload file command.
 
 ## Why I created WP_CMS_IMPORTER
 
