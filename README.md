@@ -111,9 +111,9 @@ The class processes the data that is included in the WordPress XML export file b
 
 The XML import script does not import the featured images since those are not included in the default WP export XML files. There are several plugins available to include that data however. If you are using one of those plugins, you can easily modify the class and db schema to acommodate the additional field. The script also does not import other content on the page such as sidebar content, header images, etc. (That content will be specific to the WordPress install as well and not relevant for use in an external system).
 
-## Other Uses | Enhancements
+## Integration Recommendations | Enhancements
 
-If you will be integrating this class directly into an existing application and not using it as a stand-alone import script (tool), I recommend calling it from a client-side ajax function of equivalent. The way I integrated this class into our CMS was:
+If you will be integrating this class directly into an existing application and not using it as a stand-alone import script, I recommend calling it from a client-side ajax function of equivalent. The way I integrated this class into our CMS admin system was:
 
 - Client uploads their WordPress XML posts of pages file with a standard PHP upload scripta and AJAX
 - Success function of the 1st AJAX call triggers the $cms_content->process("xml") with another AJAX call.
@@ -124,7 +124,9 @@ If you will be integrating this class directly into an existing application and 
 
 if the global config variable 'WP_CMS_SILENT' is set to OFF (default), the messages that are outputted during the conversion process can be used directly in your JS functions for client status messages.
 
-Another use for this script is converting all image references in the imported content from locallly saved files to CDN distributed images. Adding a simple PHP str_replace statement in the cleanImages function to replace the root site URL with the CDN url provides this functionality:
+Another use for this script is converting all image references in the imported WP content from locallly saved files to CDN distributed images. 
+
+Adding a simple PHP str_replace statement in the **cleanImages()** function to replace the root site URL with the CDN url provides this functionality:
 
 ```
 $src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);
@@ -132,7 +134,9 @@ $src = str_replace($site_root, 'https://d3t2z2w3vv9t89j.cloudfront.net/', $src);
 
 Another enhancement is adding an API call to post the files to a CDN instead of simply copying them to the local server's images folder. 
 
-Replacing copy($file_url, $destination_save); in the db_copy_images() function with an API call (post) to a specific provider (i.e. AWS s3) will allow you to post all the page images directly to the CDN.
+Replacing copy($file_url, $destination_save); in the **db_copy_images()** function with an API call (post) to a specific provider (i.e. AWS s3) will allow you to post all the page images directly to the CDN and optimize the site pages for global content distribution in the new CMS.
+
+I have successfully integratd the AWS PHP SDK with this class to post all images to an s3 bucket (Bucket is an assigned Cloudfront distribution).
 
 ## Why I created WP_CMS_IMPORTER
 
