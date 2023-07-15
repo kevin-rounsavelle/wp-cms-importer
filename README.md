@@ -60,13 +60,13 @@ $cms_content->process("images", $saved_images_path);
 
 The following mysql database tables will be automatically created on the destination database if DATABASE is set in WP_CMS_MODE. (TEST mode will simply output the converted data to the screen but not save it anywhere).
 
-imported_cms_admins
-imported_cms_categories
-imported_cms_categories_assocations
-imported_cms_content
-imported_cms_images_copy_log
-imported_cms_tags
-imported_cms_tags_assocations
+- imported_cms_admins
+- imported_cms_categories
+- imported_cms_categories_assocations
+- imported_cms_content
+- imported_cms_images_copy_log
+- imported_cms_tags
+- imported_cms_tags_assocations
 
 If you prefer to have the script directly add the content into your existing CMS tables, all DB related functions in the class file start with db_ and can be modified with your specific table and field names.
 
@@ -87,7 +87,7 @@ Example, to modify the script to check your existing usernames table and add new
 
 #### Is there a limit on the amount of data that can be processed?
 
-No, there is no limit on the number of pages, posts or images that can be imported and transferred. The script could potentially time-out when 100s of MBs of images from the old server to the new server but since the images are marked off individually as completed after transferring, you can simply re-run the image copy feature if for some reason a time-out occured. The script has a high PHP script time-out already set however. To avoid a potential time-out on very, very large sites, run the XML process and Image Copy process seperately (not sequentially). More information on how to do this is in the import_example.php file.
+No, there is no limit on the number of pages, posts or images that can be imported and transferred. The script could potentially time-out when copying 100s of MBs )or GBS) of images from the old server to the new server but since the images are marked off individually as completed after transferring, you can simply re-run the image copy feature if for some reason a time-out occured. The script has a high PHP script time-out already set however. To avoid a potential time-out on very, very large sites, run the XML process and Image Copy process seperately (not sequentially). More information on how to do this is in the import_example.php file.
 
 #### Does it work on localhost?
 
