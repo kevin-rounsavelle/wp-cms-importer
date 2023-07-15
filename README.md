@@ -115,17 +115,17 @@ The XML import script does not import the featured images since those are not in
 
 ## Why I created WP_CMS_IMPORTER
 
-We needed to migrate a few dozen client WordPress sites that ranged from small sites to large sites with 100s of posts and pages and 1000s of images over to our new CMS platform.  
+I needed to migrate a few dozen client WordPress sites that ranged from small showcase sites to large ecommeerce sites with 100s of posts and pages and 1000s of images over to our new CMS platform.  
 
-Unfortunately, after manually converting a few sites, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off of WordPress. After tons of research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
+Unfortunately, after manually converting a few of the "easy" ones, I realized that it would take tons of time and repetitive tasks to get all the other client sites migrated off of WordPress. After extensive research on Google, Stack Exchange, etc, it was evident there were no tools or scripts available that could automate the process effectively. 
 
-Therefore, since we also needed to clean out all the properiety css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from wp-content to the specific images folder on the new destination server, I knew that a custom automated import function was required.
+Therefore, since we also needed to clean out the properiety css markups and comments created by both WordPress Blocks and plugins such as Elementor and Beaver Builder, as well as, automatically rename the paths from /wp-content/ to the specific images folder on the new destination server, I knew that a custom automated import function was required.
 
-Finally, since most of the new sites were still under developement, the source WP site had to remain live and we needed an easy way to repeat the import process with the most recent content once the new site was ready for launch 
+Finally, since most of the new non-WP sites were still under active developement, the "old" WordPress site had to remain live and we needed an easy way to repeat the import process with the most recent content once the new site was ready for launch 
 
-I created the WP_CMS_IMPORTER class so it could be used on WordPress site conversion projects of any size and the imported data can then be easily ported into any existing CMS or custom DB schema. The original version of this script was proprietary to our CMS DB schema but this class has been modified to import the data directly into generic temporary data tables so you can then easily copy those records into your specific mysql tables (if required).
+I created the WP_CMS_IMPORTER class so it could be used on WordPress site conversion projects of any size and the imported data can then be easily ported into any existing CMS or custom DB schema. The original version of this script was mapped to our CMS DB schema but the published wp_cms_importer code has been modified to import the WordPress content directly into generic temporary MySQL tables so you can then easily copy those records into your specific custom tables (if required).
 
-The conversion time for importing clean and usable WP content has now decreased from hours to minutes and I hope this PHP class helps other developers who have been struggling with importing WP content into other sytems.
+By using the wp_cms_importer class instead of manually importing the WP posts and pages into a non-WordPress system, the content conversion time per site has decreased from hours to minutes. I hope this PHP class helps other developers who have been struggling with importing WP content into other sytems and please reach out if you have any questions or need assistance on modifying the _db functions inside the class to integrate with your MySQL DB schema.
 ## Authors
 
 - [@kevin-rounsavelle](https://www.github.com/kevin-rounsavelle)
