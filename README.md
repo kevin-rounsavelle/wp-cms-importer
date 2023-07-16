@@ -60,19 +60,19 @@ define( 'WP_CMS_SILENT', "OFF");
 define( 'WP_CMS_CSS', "ON");
 //Clean image css (ON or OFF).
 
-$images_css= "img-responsive";
+$images_css = "img-responsive";
 //Default image classes to be added to imported data (optional).
 
-$uploads_folder= 'site-media';
+$uploads_folder = 'site-media';
 //Destination folder of imported image files.
 
-$saved_images_path= "/";
+$saved_images_path = "/";
 //Relative path to $uploads_folder in relation to script location. Leave as "/" for root.
 
-$wp_xml= 'posts.xml';
+$wp_xml = 'posts.xml';
 //WP posts or WP pages xml export file name/path.
 
-$development_url= "";
+$development_url = "";
 //URL of development server (optional).
 ```
 
