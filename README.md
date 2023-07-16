@@ -30,25 +30,25 @@ Recommended modifying the included import_example.php file when first using the 
 
 ## Config Settings
 ```
-define( 'WP_CMS_MODE', "TEST");              // Sets the import run mode: TEST or DATABASE
-define( 'WP_CMS_HOSTNAME', "localhost");     // mysql database hostname 
-define( 'WP_CMS_USERNAME', "username");      // mysql database username 
-define( 'WP_CMS_PASSWORD', "password");      // mysql database password 
+define( 'WP_CMS_MODE', "TEST"); // Sets the import run mode: TEST or DATABASE
+define( 'WP_CMS_HOSTNAME', "localhost"); // mysql database hostname 
+define( 'WP_CMS_USERNAME', "username");// mysql database username 
+define( 'WP_CMS_PASSWORD', "password"); // mysql database password 
 define( 'WP_CMS_DATABASE', "database_name"); // mysql database name
 
-define( 'WP_CMS_DOCS_INCREMENT', "1");       // Starting value for imported records.
+define( 'WP_CMS_DOCS_INCREMENT', "1");// Starting value for imported records.
 define( 'WP_CMS_CATEGORIES_INCREMENT', "1"); // Starting value for imported categories
-define( 'WP_CMS_TAGS_INCREMENT', "1");       // Starting value for imported tags.
-define( 'WP_CMS_SILENT', "OFF");             // If status messages will be outputted on screen. Set to ON for silent mode.
-define( 'WP_CMS_CSS', "ON");                 // Clean image css (ON or OFF)
+define( 'WP_CMS_TAGS_INCREMENT', "1"); // Starting value for imported tags.
+define( 'WP_CMS_SILENT', "OFF"); // If status messages will be outputted on screen. Set to ON for silent mode.
+define( 'WP_CMS_CSS', "ON"); // Clean image css (ON or OFF)
 
-$images_css     	  = "img-responsive";      // Default image classes to be added to imported data (optional)	
-$uploads_folder 	  = 'site-media';          // Destination folder of imported image files
-$saved_images_path 	= "/";                   // Relative path to $uploads_folder in relation to script location. Leave as "/" for root.
+$images_css     	  = "img-responsive"; // Default image classes to be added to imported data (optional)	
+$uploads_folder 	  = 'site-media'; // Destination folder of imported image files
+$saved_images_path 	= "/"; // Relative path to $uploads_folder in relation to script location. Leave as "/" for root.
 
-$wp_xml      		    = 'posts.xml';           // WP posts or WP pages xml export file name/path.
+$wp_xml      		    = 'posts.xml'; // WP posts or WP pages xml export file name/path.
 
-$development_url    = "";                    // URL of development server (optional).
+$development_url    = ""; // URL of development server (optional).
 ```
 
 After setting the configuration variables, initilize the class and call the specific function as shown below:
