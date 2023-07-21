@@ -43,9 +43,9 @@ $images_css     = "img-responsive";
 
 /* $images_css sets the class (or classes) that should be assigned to all images by default. You can leave this field blank if the images should be cleaned or their existing CSS classed but not have any default class assigned. You can specify multiple classes by seperating them with a space. If you prefer to leave the image's css as-is simply set the WP_CMS_CSS to OFF.*/
 
-$uploads_folder = 'site-media'; 
+$uploads_folder = 'media'; 
 
-/*Replaces 'wp-content/uploads' in all image paths in the imported content. This is the directory on the New server where your images will be stored. If you will be using /wp-content/uploads/ on the new server as , instead of an alternate folder, just leave it empty > $uploads_folder = ''; */
+/*Replaces 'wp-content' in all image paths in the imported content. This is the directory on the NEW server where your images will be stored. Do not include a trailing slash, example: 'images' or 'site_content/images'.  If you will be using /wp-content/ on the new server, instead of an alternate folder, just leave it empty. Example:  $uploads_folder = ''; */
 
 $saved_images_path = "/"; 
 
