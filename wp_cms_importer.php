@@ -137,8 +137,9 @@ class wp_cms_importer
                                 if ($author == "wpauthor_display_name") {
                                     $logindisplayname =  $author_data;
                                 }
-
+                                 if (WP_CMS_MODE == "DATABASE") {
                                 $this->db_check_admins($loginname, $loginemail, $loginfirstname, $loginlastname, $logindisplayname);
+								 }
                             }
                         } else {
                             // this is a nested array with multiple levels..
