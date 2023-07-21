@@ -75,10 +75,6 @@ class wp_cms_importer
      */
     private function process_xml()
     {
-
-        $content_authors    = array(); // list of all content authors for all docs on site.	
-        $db = "";
-
         //document specific variables.. these are all sent to the crete document function which you can use to add the records to your database, download the images and post them to your server, etc
 
         $doc_title              = ""; // Title of the post or page
@@ -110,11 +106,11 @@ class wp_cms_importer
                     }
                     if ($key2 == 'wpauthor') {
 
-                        $loginname             = "";
-                        $loginemail             = "";
-                        $loginfirstname         = "";
-                        $loginlastname         = "";
-                        $logindisplayname     = "";
+                        $loginname        	= "";
+                        $loginemail       	= "";
+                        $loginfirstname   	= "";
+                        $loginlastname    	= "";
+                        $logindisplayname 	= "";
 
                         if (count($value2) == count($value2, COUNT_RECURSIVE)) {
                             // this is a one-level array... single author for all content
@@ -977,10 +973,10 @@ class wp_cms_importer
         $cms_data_lookup->free_result();
         $cms_data_lookup->close();
 
-        $categories_list    = "";
+        $categories_list   = "";
         $tags_list         = "";
-        $images_list_old    = "";
-        $images_list_new     = "";
+        $images_list_old   = "";
+        $images_list_new   = "";
 
         if ($doc_categories) {
             foreach ($doc_categories as $cats) {
