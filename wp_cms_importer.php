@@ -4,8 +4,6 @@
  * Imports WordPress Posts or Pages Content from XML export file into external MySQl database
  *
  * @author 	Kevin Rounsavelle
- * @copyright 2023
- * @version	1.0
  */
 
 class wp_cms_importer
@@ -27,9 +25,9 @@ class wp_cms_importer
         $this->feed               	= $wp_xml;
         $this->uploads_folder     	= $uploads_folder;
         $this->images_css          	= $images_css;
-		$this->processed			= "";
-        $this->uploads_folder_path  = "/";
-		$this->dev_url              = $development_url;
+	$this->processed		= "";
+        $this->uploads_folder_path  	= "/";
+	$this->dev_url              	= $development_url;
 
         if (WP_CMS_MODE == "DATABASE") {
 			
@@ -87,22 +85,22 @@ class wp_cms_importer
         $doc_title             	= ""; // Title of the post or page
         $doc_slug            	= ""; // URL (slug) of the post or page
         $doc_status          	= ""; // Active status of doc - i,e published or draft.
-		$doc_type				= ""; // Type of doc - page, post or custom post type
+	$doc_type		= ""; // Type of doc - page, post or custom post type
         $doc_creator        	= ""; // Author / creator of the post or page.
         $doc_post_date      	= ""; // Doc Post | Published Date.
         $doc_modified_date     	= ""; // Doc last edited date.
         $doc_content           	= ""; // Page or Post HTML content
-	    $doc_images_new 		= array(); // Array of images that have been cleaned from WP-specific CSS and paths.
-        $doc_images_old 		= array(); // Array of images in their original status and paths.
+	$doc_images_new 	= array(); // Array of images that have been cleaned from WP-specific CSS and paths.
+        $doc_images_old 	= array(); // Array of images in their original status and paths.
         $doc_tags            	= array(); // Array of tags for the individual page or post - name and slug.
-        $doc_categories    		= array(); // Array of categories for the individual [age or post - name and slug	
+        $doc_categories    	= array(); // Array of categories for the individual [age or post - name and slug	
 
-        $feed         			= file_get_contents($this->feed);
-        $feed         			= str_replace("content:encoded", "contentEncoded", $feed);
-        $feed         			= str_replace("dc:creator", "dccreator", $feed);
-        $feed         			= str_replace("wp:", "wp", $feed);
-        $xml         			= simplexml_load_string($feed);
-        $import_wp     			= $this->simplexmlToArray($xml);
+        $feed         		= file_get_contents($this->feed);
+        $feed         		= str_replace("content:encoded", "contentEncoded", $feed);
+        $feed         		= str_replace("dc:creator", "dccreator", $feed);
+        $feed         		= str_replace("wp:", "wp", $feed);
+        $xml         		= simplexml_load_string($feed);
+        $import_wp     		= $this->simplexmlToArray($xml);
 
         foreach ($import_wp as $key => $value) {
 
@@ -189,12 +187,12 @@ class wp_cms_importer
                                     $link = rtrim($link, "/");
                                     $doc_slug = $link;
                                 }
-								//status
+				//status
                                 if ($key3 == 'wpstatus') {
                                     $doc_status =  $value3;
                                 }
-								//type
-								if ($key3 == 'wppost_type') {
+				//type
+				if ($key3 == 'wppost_type') {
                                     $doc_type =  $value3;
                                 }
 
@@ -223,8 +221,8 @@ class wp_cms_importer
                                     preg_match_all('/<img [^>]+>/', $value3, $image_matches, PREG_SET_ORDER);
                                     foreach ($image_matches as $ikey => $ivalue) {
                                         foreach ($ivalue as $images) {
-											$images = str_replace("&", " ", $images);
-		                                    $images = str_replace(",", " ", $images);
+					    $images = str_replace("&", " ", $images);
+		                            $images = str_replace(",", " ", $images);
                                             $cleaned_image = "";
                                             $cleaned_image = $this->cleanImage($images, $site_root);
                                             $doc_content = str_replace($images, $cleaned_image, $doc_content);
@@ -242,10 +240,10 @@ class wp_cms_importer
                                     $doc_content = $this->remove_html_comments($doc_content);
 									// replace site URL with development URL if set
                                     if ($this->dev_url != "") {
-										$dev_url = rtrim($this->dev_url, "/");
-										$dev_url = $dev_url . "/";
-										$doc_content = str_replace($site_root, $dev_url, $doc_content);
-										}
+						$dev_url = rtrim($this->dev_url, "/");
+						$dev_url = $dev_url . "/";
+						$doc_content = str_replace($site_root, $dev_url, $doc_content);
+						}
                                     $doc_images_new = array_filter($doc_images_new);
                                     $doc_images_old = array_filter($doc_images_old);
                                 }
@@ -293,9 +291,9 @@ class wp_cms_importer
                                                 );
                                             }
 											
-											if (WP_CMS_MODE == "DATABASE") {
-														$this->db_add_tag($tag_name,$tag_slug); 
-												}
+					if (WP_CMS_MODE == "DATABASE") {
+						$this->db_add_tag($tag_name,$tag_slug); 
+					    }
 
                                             array_push($doc_tags, $tags_data);
                                         } else {
@@ -323,9 +321,9 @@ class wp_cms_importer
                                                 );
                                             }
 											
-												if (WP_CMS_MODE == "DATABASE") {
-														$this->db_add_category($cat_name,$cat_slug); 
-												}
+					if (WP_CMS_MODE == "DATABASE") {
+						$this->db_add_category($cat_name,$cat_slug); 
+					    }
 
                                             array_push($doc_categories, $categories_data);
                                         }
@@ -366,9 +364,9 @@ class wp_cms_importer
                                                     );
                                                 }
 												
-												if (WP_CMS_MODE == "DATABASE") {
-														$this->db_add_tag($tag_name,$tag_slug); 
-												    }
+						if (WP_CMS_MODE == "DATABASE") {
+							$this->db_add_tag($tag_name,$tag_slug); 
+						}
 
                                                 array_push($doc_tags, $tags_data);
                                             } else {
@@ -398,9 +396,9 @@ class wp_cms_importer
                                                     );
                                                 }
 												
-												if (WP_CMS_MODE == "DATABASE") {
-													$this->db_add_category($cat_name,$cat_slug); 
-												}
+						if (WP_CMS_MODE == "DATABASE") {
+							$this->db_add_category($cat_name,$cat_slug); 
+						}
 
                                                 array_push($doc_categories, $categories_data);
                                             }
@@ -413,7 +411,7 @@ class wp_cms_importer
                                 $doc_title,
                                 $doc_slug,
                                 $doc_status,
-								$doc_type,
+				$doc_type,
                                 $doc_creator,
                                 $doc_post_date,
                                 $doc_modified_date,
@@ -469,7 +467,7 @@ class wp_cms_importer
             $height = "";
             $output = "";
             $alt =  "";
-			$class = "";
+	    $class = "";
 
             if ($img->hasAttribute('src')) {
                 $src = ' src="' . $img->getAttribute('src') . '"';
@@ -573,7 +571,7 @@ class wp_cms_importer
         $doc_title,
         $doc_slug,
         $doc_status,
-		$doc_type,
+	$doc_type,
         $doc_creator,
         $doc_post_date,
         $doc_modified_date,
@@ -589,7 +587,7 @@ class wp_cms_importer
             echo "<hr>";
             echo "<br><h4>Title:</h4> " . $doc_title;
             echo "<br><h4>Slug:</h4> " . $doc_slug;
-			echo "<br><h4>Type:</h4> " . $doc_type;
+	    echo "<br><h4>Type:</h4> " . $doc_type;
             echo "<br><h4>Status:</h4> " . $doc_status;
             echo "<br><h4>Creator:</h4> " . $doc_creator;
             echo "<br><h4>Post-Date:</h4> " . $doc_post_date;
@@ -642,18 +640,18 @@ class wp_cms_importer
 		if (WP_CMS_MODE == "DATABASE") {
 			
 			$this->db_add_document(
-					$doc_title,
+				$doc_title,
         			$doc_slug,
         			$doc_status,
-				    $doc_type,
+				$doc_type,
         			$doc_creator,
         			$doc_post_date,
-					$doc_modified_date,
-					$doc_content,
-					$doc_images_new,
-					$doc_images_old,
-					$doc_tags,
-					$doc_categories);
+				$doc_modified_date,
+				$doc_content,
+				$doc_images_new,
+				$doc_images_old,
+				$doc_tags,
+				$doc_categories);
 		        }
     }
 
@@ -785,19 +783,19 @@ class wp_cms_importer
 		
 		$cms_data_lookup = $this->cms_db->prepare("SELECT username FROM imported_cms_admins WHERE username = ?");
 
-        $cms_data_lookup->bind_param('s', $loginname);
-        $cms_data_lookup->execute();
+        	$cms_data_lookup->bind_param('s', $loginname);
+        	$cms_data_lookup->execute();
 		$cms_data_lookup->store_result();
-        $cms_data_lookup->bind_result($username);
+        	$cms_data_lookup->bind_result($username);
 		
 	 if ($cms_data_lookup->num_rows == 0 && $loginname != "")  {
 		  
 		  // user not found .. add a new user to the sample admins table so that there is an association between the admins and the content records.
 		 
-		  $temp_password = md5(rand(10000,10000000)); // random temporary password for new admin (creator) acct record.
-		  $add_date = date ("Y-m-d G:i:s");
+		  	$temp_password = md5(rand(10000,10000000)); // random temporary password for new admin (creator) acct record.
+		  	$add_date = date ("Y-m-d G:i:s");
 
-          $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_admins (username,email,first_name,last_name, display_name,login_password,date_added) VALUES (?, ?, ? , ?, ?, ?, ?)");
+          		    $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_admins (username,email,first_name,last_name, display_name,login_password,date_added) VALUES (?, ?, ? , ?, ?, ?, ?)");
 		 
                             $dbinsert->bind_param('sssssss', $loginname, $loginemail, $loginfirstname, $loginlastname, $logindisplayname, $temp_password, $add_date);
                             $dbinsert->execute();
@@ -805,9 +803,9 @@ class wp_cms_importer
 
         			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
-    }
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
+	    }
 	
 	
 	/**
@@ -821,16 +819,16 @@ class wp_cms_importer
 
 		$cms_data_lookup = $this->cms_db->prepare("SELECT category_name FROM imported_cms_categories WHERE category_name = ?");
 
-        $cms_data_lookup->bind_param('s', $cat_name);
-        $cms_data_lookup->execute();
+       		$cms_data_lookup->bind_param('s', $cat_name);
+        	$cms_data_lookup->execute();
 		$cms_data_lookup->store_result();
-        $cms_data_lookup->bind_result($category_name);
+        	$cms_data_lookup->bind_result($category_name);
 		
 	 if ($cms_data_lookup->num_rows == 0)  {
 		 
 		  // category not found .. add it to the sample import categpries table...
 		 
-          $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_categories (category_name,category_slug) VALUES (?, ?)");
+         	 	    $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_categories (category_name,category_slug) VALUES (?, ?)");
 		 
                             $dbinsert->bind_param('ss', $cat_name, $cat_slug);
                             $dbinsert->execute();
@@ -838,9 +836,9 @@ class wp_cms_importer
 
         			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
-    }
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
+    	}
 	
 	
 	/**
@@ -854,14 +852,14 @@ class wp_cms_importer
 		
 		$cms_data_lookup = $this->cms_db->prepare("SELECT category_id FROM imported_cms_categories WHERE category_name = ?");
 
-        $cms_data_lookup->bind_param('s', $cat_name);
-        $cms_data_lookup->execute();
+        	$cms_data_lookup->bind_param('s', $cat_name);
+        	$cms_data_lookup->execute();
 		$cms_data_lookup->store_result();
-        $cms_data_lookup->bind_result($category_id);
-            if ($cms_data_lookup->num_rows > 0) {
-                $cms_data_lookup->fetch();
+       		$cms_data_lookup->bind_result($category_id);
+            	if ($cms_data_lookup->num_rows > 0) {
+                	$cms_data_lookup->fetch();
 
-          $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_categories_associations (category_id, content_id) VALUES (?, ?)");
+          		   $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_categories_associations (category_id, content_id) VALUES (?, ?)");
 		 
                             $dbinsert->bind_param('ii', $category_id, $content_id);
                             $dbinsert->execute();
@@ -869,9 +867,9 @@ class wp_cms_importer
 
         			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
-    }
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
+    	}
 		
 	/**
 	 * Add New Tag To Database From XML Content If It Doesn't Already Exist in Database.
@@ -884,26 +882,26 @@ class wp_cms_importer
 		
 		$cms_data_lookup = $this->cms_db->prepare("SELECT tag_name FROM imported_cms_tags WHERE tag_name = ?");
 
-        $cms_data_lookup->bind_param('s', $tag_name);
-        $cms_data_lookup->execute();
+        	$cms_data_lookup->bind_param('s', $tag_name);
+        	$cms_data_lookup->execute();
 		$cms_data_lookup->store_result();
-        $cms_data_lookup->bind_result($tag_name);
+        	$cms_data_lookup->bind_result($tag_name);
 		
 	 if ($cms_data_lookup->num_rows == 0)  {
 		  
 		  // category not found .. add it to the sample import categpries table...
 
-          $dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_tags (tag_name,tag_slug) VALUES (?, ?)");
+          			$dbinsert = $this->cms_db->prepare("INSERT INTO imported_cms_tags (tag_name,tag_slug) VALUES (?, ?)");
 		 
-                            $dbinsert->bind_param('ss', $tag_name, $tag_slug);
-                            $dbinsert->execute();
-                            $dbinsert->close();
+                            	$dbinsert->bind_param('ss', $tag_name, $tag_slug);
+                            	$dbinsert->execute();
+                            	$dbinsert->close();
 
         			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
-    }	
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
+    		}	
 	
 	/**
 	 * Add New Tag Association Record Between Content Record and Tag Records
@@ -916,10 +914,10 @@ private function db_add_tag_association($tag_name, $content_id) {
 		
 		$cms_data_lookup = $this->cms_db->prepare("SELECT tag_id FROM imported_cms_tags WHERE tag_name = ?");
 
-        $cms_data_lookup->bind_param('s', $tag_name);
-        $cms_data_lookup->execute();
+        	$cms_data_lookup->bind_param('s', $tag_name);
+        	$cms_data_lookup->execute();
 		$cms_data_lookup->store_result();
-        $cms_data_lookup->bind_result($tag_id);
+        	$cms_data_lookup->bind_result($tag_id);
             if ($cms_data_lookup->num_rows > 0) {
                 $cms_data_lookup->fetch();
 
@@ -931,8 +929,8 @@ private function db_add_tag_association($tag_name, $content_id) {
 
         			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
     }
 			
 	/**
@@ -956,7 +954,7 @@ private function db_add_tag_association($tag_name, $content_id) {
         $doc_title,
         $doc_slug,
         $doc_status,
-		$doc_type,
+	$doc_type,
         $doc_creator,
         $doc_post_date,
         $doc_modified_date,
@@ -975,15 +973,15 @@ private function db_add_tag_association($tag_name, $content_id) {
 
         $cms_data_lookup->bind_param('s', $doc_creator);
         $cms_data_lookup->execute();
-		$cms_data_lookup->store_result();
+	$cms_data_lookup->store_result();
         $cms_data_lookup->bind_result($admin_id);
             if ($cms_data_lookup->num_rows > 0) {
                 $cms_data_lookup->fetch();
                 $admin_id  =  $admin_id;
             }
             
-            $cms_data_lookup->free_result();
-            $cms_data_lookup->close();
+        $cms_data_lookup->free_result();
+        $cms_data_lookup->close();
 		
 	  $categories_list	= ""; 
 	  $tags_list 		= ""; 
@@ -991,7 +989,7 @@ private function db_add_tag_association($tag_name, $content_id) {
 	  $images_list_new 	= "";
 		
 	  if ($doc_categories) {
-		  foreach ($doc_categories as $cats) {
+		  	foreach ($doc_categories as $cats) {
 			  foreach ($cats as $cattype => $catvalue) {
 				  if ($cattype == 'name') {
 					  $categories_list = $categories_list. $catvalue . ", ";
@@ -1074,26 +1072,26 @@ private function db_add_tag_association($tag_name, $content_id) {
     {
         $copy_status = 0;
 		
-		$cms_data_lookup = $this->cms_db->prepare("SELECT image_id, image_url FROM imported_cms_images_copy_log WHERE image_copied = ? ORDER BY image_id ASC");
+	$cms_data_lookup = $this->cms_db->prepare("SELECT image_id, image_url FROM imported_cms_images_copy_log WHERE image_copied = ? ORDER BY image_id ASC");
 
         $cms_data_lookup->bind_param('i', $copy_status);
         $cms_data_lookup->execute();
-		$cms_data_lookup->store_result();
+	$cms_data_lookup->store_result();
         $cms_data_lookup->bind_result($image_id, $image_url);
             if ($cms_data_lookup->num_rows > 0) {
 				
 				while ($cms_data_lookup->fetch()) {
 					
-					    $dom = new DOMDocument();
-                        $dom->loadHTML($image_url);
-					     // get image name, and source directory info.
-					    $imgs = $dom->getElementsByTagName('img');
+				$dom = new DOMDocument();
+                       	 	$dom->loadHTML($image_url);
+				// get image name, and source directory info.
+				$imgs = $dom->getElementsByTagName('img');
 
-        				foreach ($imgs as $img) {
+        			foreach ($imgs as $img) {
             			$src = "";
       
             			if ($img->hasAttribute('src')) {
-								$src= $img->getAttribute('src');
+					$src= $img->getAttribute('src');
             					}
 						$file_name = basename($src);
 						$file_url = $src;
@@ -1102,7 +1100,7 @@ private function db_add_tag_association($tag_name, $content_id) {
 						$src = str_replace("https:///", "", $src);
 						$src = str_replace("http:///", "", $src);
 						if ($this->uploads_folder != "") {
-                			$src = str_replace('wp-content', $this->uploads_folder, $src);
+                				   $src = str_replace('wp-content', $this->uploads_folder, $src);
 						}	
 						if ($this->uploads_folder_path == "/") {
 							$this->uploads_folder_path = "";
@@ -1112,12 +1110,12 @@ private function db_add_tag_association($tag_name, $content_id) {
 							
 							// Create new folder for copied image if it doesn't exist;
 					    		if (!file_exists($folder)) {
-   							   			mkdir($folder, 0755, true);
+   								mkdir($folder, 0755, true);
 									}
 							
 							}
-					   $destination_save = $folder. $file_name; // full path the file name to save copied image
-                       copy($file_url, $destination_save);
+				$destination_save = $folder. $file_name; // full path the file name to save copied image
+                       		copy($file_url, $destination_save);
 					
 					   if (WP_CMS_SILENT == "OFF") {
 					   	echo "Copied - > ". $destination_save."<br>";
@@ -1132,9 +1130,9 @@ private function db_add_tag_association($tag_name, $content_id) {
 			   
 			}
 		   
-		  $cms_data_lookup->free_result();
-          $cms_data_lookup->close();
-		  $this->processed = "images";
+		  	$cms_data_lookup->free_result();
+          		$cms_data_lookup->close();
+		  	$this->processed = "images";
     }
 
 	
