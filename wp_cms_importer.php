@@ -467,10 +467,8 @@ class wp_cms_importer
                 if ($this->uploads_folder != "") {
                     // make sure it is not a CDN image...
                     if (strpos($src, $site_root) !== false) {
-                        // this is a CDN image...
-                    } else {
-                        $src = str_replace('wp-content', $this->uploads_folder, $src);
-                    }
+                       $src = str_replace('wp-content', $this->uploads_folder, $src);
+                    } 
                 }
             }
 
