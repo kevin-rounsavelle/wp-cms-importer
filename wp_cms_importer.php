@@ -3,7 +3,7 @@
 /**
  * Imports WordPress Posts or Pages Content from XML export file into external MySQl database
  *
- * @author 	Kevin Rounsavelle
+ * @author Kevin Rounsavelle
  */
 
 class wp_cms_importer
@@ -22,9 +22,9 @@ class wp_cms_importer
 
     {
 
-        $this->feed                   = $wp_xml;
-        $this->uploads_folder         = $uploads_folder;
-        $this->images_css              = $images_css;
+        $this->feed                 = $wp_xml;
+        $this->uploads_folder       = $uploads_folder;
+        $this->images_css           = $images_css;
         $this->processed            = "";
         $this->uploads_folder_path  = "/";
         $this->dev_url              = $development_url;
@@ -81,25 +81,25 @@ class wp_cms_importer
 
         //document specific variables.. these are all sent to the crete document function which you can use to add the records to your database, download the images and post them to your server, etc
 
-        $doc_title                 = ""; // Title of the post or page
-        $doc_slug                = ""; // URL (slug) of the post or page
-        $doc_status              = ""; // Active status of doc - i,e published or draft.
-        $doc_type                = ""; // Type of doc - page, post or custom post type
+        $doc_title              = ""; // Title of the post or page
+        $doc_slug               = ""; // URL (slug) of the post or page
+        $doc_status             = ""; // Active status of doc - i,e published or draft.
+        $doc_type               = ""; // Type of doc - page, post or custom post type
         $doc_creator            = ""; // Author / creator of the post or page.
         $doc_post_date          = ""; // Doc Post | Published Date.
-        $doc_modified_date         = ""; // Doc last edited date.
-        $doc_content               = ""; // Page or Post HTML content
+        $doc_modified_date      = ""; // Doc last edited date.
+        $doc_content            = ""; // Page or Post HTML content
         $doc_images_new         = array(); // Array of images that have been cleaned from WP-specific CSS and paths.
         $doc_images_old         = array(); // Array of images in their original status and paths.
-        $doc_tags                = array(); // Array of tags for the individual page or post - name and slug.
-        $doc_categories            = array(); // Array of categories for the individual [age or post - name and slug	
+        $doc_tags               = array(); // Array of tags for the individual page or post - name and slug.
+        $doc_categories         = array(); // Array of categories for the individual [age or post - name and slug	
 
-        $feed                     = file_get_contents($this->feed);
-        $feed                     = str_replace("content:encoded", "contentEncoded", $feed);
-        $feed                     = str_replace("dc:creator", "dccreator", $feed);
-        $feed                     = str_replace("wp:", "wp", $feed);
-        $xml                     = simplexml_load_string($feed);
-        $import_wp                 = $this->simplexmlToArray($xml);
+        $feed                   = file_get_contents($this->feed);
+        $feed                   = str_replace("content:encoded", "contentEncoded", $feed);
+        $feed                   = str_replace("dc:creator", "dccreator", $feed);
+        $feed                   = str_replace("wp:", "wp", $feed);
+        $xml                    = simplexml_load_string($feed);
+        $import_wp              = $this->simplexmlToArray($xml);
 
         foreach ($import_wp as $key => $value) {
 
