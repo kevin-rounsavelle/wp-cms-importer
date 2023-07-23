@@ -58,15 +58,13 @@ class wp_cms_importer
         } elseif ($type == trim(strtolower("images"))) {
 
             if (WP_CMS_MODE == "DATABASE") { // only execute copy process if not in test-mode.
-
-                $this->db_copy_images(); // copy images off old server to new server.
-            }
+		 if ($path != "") {
+            		$this->uploads_folder_path = $path;
+        		}
+               	 $this->db_copy_images(); // copy images off old server to new server.
+            	}
         } else {
             exit;
-        }
-
-        if ($path != "") {
-            $this->uploads_folder_path = $path;
         }
     }
 
@@ -1095,7 +1093,7 @@ class wp_cms_importer
                     if ($this->uploads_folder_path == "/") {
                         $this->uploads_folder_path = "";
                     }
-                    //$src = $this->uploads_folder_path. $src;
+                    $src = $this->uploads_folder_path. $src;
                     $folder = str_replace($file_name, "", $src);
 
                     // Create new folder for copied image if it doesn't exist;
