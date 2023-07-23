@@ -221,7 +221,10 @@ class wp_cms_importer
                                             $cleaned_image = $this->cleanImage($images, $site_root);
                                             $doc_content = str_replace($images, $cleaned_image, $doc_content);
                                             $cleaned_images = $cleaned_images . $cleaned_image . ",";
-                                            $original_images = $original_images . $images . ',';
+						// Only add locally saved (NON-CDN) images to the list for db_copy_images() ($doc_images_old array)
+						if (strpos($images, $site_root) !== false) {
+                       					$original_images = $original_images. $images . ',';
+                    			           } 	
                                         }
                                     }
 
