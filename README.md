@@ -143,7 +143,7 @@ The XML import script does not import the featured images since those are not in
 
 ## Integration Recommendations | Enhancements
 
-If you will be integrating this class directly into an existing application and not using it as a stand-alone import script, I recommend calling it from a client-side ajax function of equivalent. The way I integrated this class into our CMS admin system was:
+If you will be integrating this class directly into an existing application and not using it as a stand-alone import script, I recommend calling it from a client-side ajax function or equivalent. The way I integrated this class into our CMS admin system was:
 
 - Client uploads their WordPress XML posts of pages file with a standard PHP upload scripta and AJAX
 - Success function of the 1st AJAX call triggers the $cms_content->process("xml") with another AJAX call.
